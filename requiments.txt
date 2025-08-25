@@ -1,0 +1,10 @@
+apache-beam
+python-dotenv
+termcolor
+print-dict
+pytest
+pytest-cov
+mypy
+flake8
+importchecker
+autopep8
