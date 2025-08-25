@@ -209,6 +209,8 @@ __marimo__/
 # Custom
 *~*
 *#*
+*.swp
 *.rar
 data/*.csv
 data/*.txt
+

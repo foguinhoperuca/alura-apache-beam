@@ -21,7 +21,7 @@ DENGUE_COLUMNS: List[str] = [
 ]
 
 
-def text_to_list(el: str, delimiter: str = '|') -> List[Any]:
+def text_to_list(el: Any, delimiter: str = '|') -> List[Any]:
     """
     el: str = an element to be parsed
     delimitator: str = a delimitator that will help split text
@@ -85,13 +85,13 @@ def key_uf_year_month_list(el: List[Any]) -> Tuple[Any, Any]:
     return key, mm
 
 
-def round_me(el: Tuple[str, Any], decimal_places: int = 1) -> Tuple[Any, Any]:  # noqa: E501
+def round_me(el: Tuple[Any, Any], decimal_places: int = 1) -> Tuple[Any, Any]:  # noqa: E501
     """
     Receives a Tuple[key, mm] and round mm to decimal_places
     """
     key, mm = el
 
-    return (key, str(round(mm, decimal_places)))
+    return (key, round(mm, decimal_places))
 
 
 def filter_empty_fields(el: Tuple[str, Dict[str, List[Any]]]) -> bool:
@@ -118,12 +118,12 @@ def unpack_elements(els: Tuple[str, Dict[str, List[Any]]]) -> Tuple[Any, Any, An
     rains: str = data["rains"][0]
     dengue: str = data["dengue"][0]
 
-    return uf, year, month, str(rains), str(dengue)
+    return uf, year, month, rains, dengue
 
 
-def prepare_csv(el: Tuple[Any, Any, Any, Any, Any], delimiter: str = ";") -> str:  # noqa: E501
+def prepare_csv(elements: Tuple[Any, Any, Any, Any, Any], delimiter: str = ";") -> str:  # noqa: E501
     """
     Receive a Tuple[UF, YYYY, mm, rains, dengue] and parse it to csv as 'UF;YYYY;mm;rains;dengue' # noqa: E501
     PS: mm means month not milimeters in this context
     """
-    return f"{delimiter}".join(el)
+    return f"{delimiter}".join(str(el) for el in elements)
